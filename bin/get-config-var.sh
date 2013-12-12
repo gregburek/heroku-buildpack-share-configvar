@@ -8,5 +8,5 @@ config_var_values=`curl --user $HEROKU_SHARE_API_EMAIL:$HEROKU_SHARE_API_PASSWOR
 
 for CONFIG_VAR in $CONFIG_VARS
 do
-  export ${CONFIG_VAR}=`echo $config_var_values | grep $CONFIG_VAR | cut -d '"' -f 4`
+  export ${CONFIG_VAR}=`echo "$config_var_values" | grep $CONFIG_VAR | cut -d '"' -f 4`
 done

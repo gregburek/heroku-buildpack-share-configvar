@@ -2,7 +2,7 @@ Heroku buildpack: share-configvar
 =========================
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks)
-that allows one to pull in config vars from another app on dyno boot,
+that allows one to pull in config vars from another app on dyno boot.
 It is meant to be used in conjunction with other buildpacks as part of a
 [multi-buildpack](https://github.com/ddollar/heroku-buildpack-multi).
 
@@ -17,7 +17,7 @@ Settings
 -----
 
 - `HEROKU_SHARE_API_EMAIL` Required
-- `HEROKU_SHARE_API_PASSWORD` Required
+- `HEROKU_SHARE_API_TOKEN` Required
 - `HEROKU_SHARE_APPNAME` Required
 - `HEROKU_SHARE_CONFIGVARS` Default is DATABASE_URL
 
@@ -33,7 +33,7 @@ Example usage:
 
     $ heroku config:add HEROKU_SHARE_API_EMAIL=my-fake-email@gmail.com
 
-    $ heroku config:add HEROKU_SHARE_API_PASSWORD=`heroku auth:token`
+    $ heroku config:add HEROKU_SHARE_API_TOKEN=`heroku auth:token`
 
     $ heroku config:add HEROKU_SHARE_APPNAME=ancient-everglades-9021
 

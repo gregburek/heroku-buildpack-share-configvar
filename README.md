@@ -10,9 +10,8 @@ The primary use of this buildpack is to allow for the sharing of Heroku Postgres
 DATABASE_URL config vars between applications as recommended by [this devcenter
 article](https://devcenter.heroku.com/articles/connecting-to-heroku-postgres-databases-from-outside-of-heroku).
 
-It uses [curl](http://curl.haxx.se//),
-[netrc](http://manpages.ubuntu.com/manpages/intrepid/man5/netrc.5.html) and
-[Heroku's v3 API](https://devcenter.heroku.com/articles/platform-api-reference).
+It uses [curl](http://curl.haxx.se//) and [Heroku's v3
+API](https://devcenter.heroku.com/articles/platform-api-reference).
 
 Settings
 -----
@@ -36,7 +35,7 @@ Example usage:
 
     $ heroku config:add HEROKU_SHARE_API_PASSWORD=`heroku auth:token`
 
-    $ heroku config:add HEROKU_SHARE_API_PASSWORD=ancient-everglades-9021
+    $ heroku config:add HEROKU_SHARE_APPNAME=ancient-everglades-9021
 
     $ cat .buildpacks
     https://github.com/gregburek/heroku-buildpack-share-configvar.git
@@ -50,21 +49,12 @@ Example usage:
     ...
     -----> Fetching custom git buildpack... done
     -----> Multipack app detected
-    =====> Downloading Buildpack: https://github.com/gregburek/heroku-buildpack-pgbouncer.git
-    =====> Detected Framework: pgbouncer-stunnel
-           Using pgbouncer version: 1.5.4
-           Using stunnel version: 4.56
-    -----> Fetching and vendoring pgbouncer into slug
-    -----> Fetching and vendoring stunnel into slug
-    -----> Moving the configuration generation script into app/.profile.d
-    -----> Moving the start-pgbouncer-stunnel script into app/bin
-    -----> pgbouncer/stunnel done
+    =====> Downloading Buildpack: https://github.com/gregburek/heroku-buildpack-share-configvar.git
+    =====> Detected Framework: share-configvar
+    -----> Moving the share config var script into app/.profile.d
+    -----> share-configvar done
     =====> Downloading Buildpack: https://github.com/heroku/heroku-buildpack-ruby.git
     =====> Detected Framework: Ruby/Rack
     -----> Using Ruby version: ruby-1.9.3
     -----> Installing dependencies using Bundler version 1.3.2
     ...
-
-The buildpack will install and configure pgbouncer and stunnel to connect to
-`DATABASE_URL` over a SSL connection. Prepend `bin/start-pgbouncer-stunnel`
-to any process in the Procfile to run pgbouncer and stunnel alongside that process.
